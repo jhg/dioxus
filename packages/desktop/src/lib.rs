@@ -49,6 +49,7 @@ pub use wry;
 pub use wry::application as tao;
 use wry::webview::WebView;
 use wry::{application::window::WindowId, webview::WebContext};
+use wry::application::platform::windows::EventLoopExtWindows;
 
 /// Launch the WebView and run the event loop.
 ///
@@ -120,7 +121,7 @@ pub fn launch_cfg(root: Component, config_builder: Config) {
 /// }
 /// ```
 pub fn launch_with_props<P: 'static>(root: Component<P>, props: P, cfg: Config) {
-    let event_loop = EventLoop::<UserWindowEvent>::with_user_event();
+    let event_loop = EventLoop::<UserWindowEvent>::new_any_thread();
 
     let proxy = event_loop.create_proxy();
 
